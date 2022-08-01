@@ -47,10 +47,10 @@
                         class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
             </tr>
              <tr>
-                <td>{{}}</td>
-                <td>Pg@gmail.com</td>
-                <td>9922498956</td>
-                <td>Pollard Farms Baner</td>
+                <td>{{this.Name}}</td>
+                <td>{{this.Email}}</td>
+                <td>{{this.Mobile}}</td>
+                <td>{{this.Address}}</td>
                 <td colspan="2"><button class="border rounded-lg p-1 bg-blue-600 text-white">Edit</button>&nbsp;<button
                         class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
             </tr>
@@ -64,6 +64,7 @@ import  UserDetails  from '/components/UserDetails.vue'
 export default {
     name: "User Form",
     components:{UserDetails},
+    props:['dataarray','items'],
 // methods:{
 //     adduser(){
 //         this.dataarray.push(this.user)
@@ -77,6 +78,5 @@ data(){
         Address:''
     }
 }
-
 }
 </script>
