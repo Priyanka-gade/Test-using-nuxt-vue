@@ -1,14 +1,15 @@
 <template>
     <div class="sm:flex w-2/3 p-5 m-5">
-        <Form class="float-left"></Form>
-        <Table class="float-right"></Table>
-
+        <Form  class="float-left"></Form>
+        <Table v-bind:dataarray="dataarray" class="float-right"></Table>
+        
     </div>
 </template>
 <script>
 
 import Table from '/components/Table.vue'
 import Form from '/components/Form.vue'
+
 
 export default {
     name: "index component",
