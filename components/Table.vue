@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div>
         <table class="sm:flex justify-center border-b m-2">
             <tr class="sm:flex bg-slate-200">
@@ -26,7 +26,7 @@
                 <td colspan="2"><button class="border rounded-lg p-1 bg-blue-600 text-white">Edit</button>&nbsp;<button
                         class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
             </tr>
-            <!-- <tr>
+             <tr>
                 <td colspan="5"><button class=" float-right border rounded-lg p-1 bg-blue-600 text-white">Add User</button></td>
             </tr> -->
         </table>
@@ -44,4 +44,4 @@ export default {
     
    
 }
-</script>
+</script> -->

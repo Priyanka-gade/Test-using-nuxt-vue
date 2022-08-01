@@ -1,19 +1,19 @@
 <template>
     <div class="sm:flex w-2/3 p-5 m-5">
-        <Form  class="float-left"></Form>
-        <Table v-bind:dataarray="dataarray" class="float-right"></Table>
-        
+        <Form class="float-left"></Form>
+        <!-- <Table v-bind:dataarray="dataarray" class="float-right"></Table> -->
+
     </div>
 </template>
 <script>
 
-import Table from '/components/Table.vue'
+// import Table from '/components/Table.vue'
 import Form from '/components/Form.vue'
 
 
 export default {
     name: "index component",
-    components: { Table, Form },
+    components: { Form },
     data() {
         return {
             dataarray: [
@@ -33,7 +33,17 @@ export default {
                     Address: "Pollard Farms Baner2",
                     // completed: false
                 }
-            ]
+            ],
+            user: {
+
+                // id: '2',
+                Name: ""
+                // Email: "ak@gmail.com",
+                // Mobile: "9765568956",
+                // Address: "Pollard Farms Baner2",
+                // // completed: false
+
+            }
         }
     }
 }

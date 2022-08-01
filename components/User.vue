@@ -15,6 +15,6 @@
 <script>
 export default {
     name: "UserC",
-    props:['dataarray']
+    props:['dataarray','items']
 }
 </script>
