@@ -1,7 +1,7 @@
 <template>
     <div>
         <table class="sm:flex justify-center border border-solid border-2 border-black m-2">
-            <tr class="bg-slate-200">
+            <tr class="sm:flex bg-slate-200">
                 <th class="py-3 px-6">
                     Name
                 </th>
