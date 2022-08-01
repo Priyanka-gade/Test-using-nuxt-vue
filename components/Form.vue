@@ -1,5 +1,5 @@
 <template>
-    <div class="sm:grid justify-items-center">
+    <div class="w-2/3">
         <div class="float-left">
             <form class="grid justify-items-left bg-slate-200 p-7 w-64">
                 <h1 class="text-center">Add New user </h1>
@@ -21,8 +21,8 @@
             </form>
         </div>
         <div class="float-right">
-            <table class="sm:flex border-b m-2">
-                <tr class="sm:flex bg-slate-200">
+            <table class="border">
+                <tr class="bg-slate-200 border my-2">
                     <th class="py-3 px-6">
                         Name
                     </th>
@@ -48,7 +48,7 @@
                             class="border rounded-lg p-1 bg-blue-600 text-white">Edit</button>&nbsp;<button
                             class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
                 </tr> -->
-                <tr v-for="row in dataarray" :key="row" class="sm:flex bg-slate-100 border-b">
+                <tr v-for="row in dataarray" :key="row" class=" bg-slate-100 border-b">
                     <td>{{ row.Name }}</td>
                     <td>{{ row.Email }}</td>
                     <td>{{ row.Mobile }}</td>
