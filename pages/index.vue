@@ -1,6 +1,6 @@
 <template>
     <div class="sm:flex w-2/3 p-5 m-5">
-        <Form v-on:add-user="addUserTodata" class="float-left"></Form>
+        <Form v-bind:dataarray="dataarray" v-on:add-user="addUserTodata" class="float-left"></Form>
         <!-- <Table v-bind:dataarray="dataarray" class="float-right"></Table> -->
 
     </div>
@@ -40,7 +40,7 @@ export default {
         methods:{
             addUserTodata(newUser){
                 this.dataarray=[...this.dataarray,newUser]
-                console.log(this.addUserTodata);
+                // console.log(this.addUserTodata);
             }
         }
 }
