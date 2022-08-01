@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div v-for="data in dataarray" :key="data">
-        {{data.Name}}
-        <User></User>
+        <div v-for="items in dataarray" :key="items">
+        <!-- {{data.Name}} -->
+        <User v-bind:dataarray="dataarray" v-bind:items="items"></User>
         </div>
     </div>
 </template>

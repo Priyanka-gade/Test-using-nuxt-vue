@@ -28,15 +28,14 @@
             </tr> -->
         </table>
         <button class="border rounded-lg p-1 bg-blue-600 text-white">Add User</button>
-        <NewUser></NewUser>
+        
     </div>
 </template>
 <script>
 
-import NewUser from '/components/NewUser.vue'
+
 export default {
     name: 'Table Component',
-    components:{NewUser},
     data() {
         return {
             dataarray: [
