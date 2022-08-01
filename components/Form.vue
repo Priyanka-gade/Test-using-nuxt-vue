@@ -48,14 +48,14 @@
                             class="border rounded-lg p-1 bg-blue-600 text-white">Edit</button>&nbsp;<button
                             class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
                 </tr> -->
-                <tr v-for="row in dataarray" :key="row" class=" bg-slate-100 border-b">
+                <tr v-for="(row,i) in dataarray" :key="row" class=" bg-slate-100 border-b">
                     <td>{{ row.Name }}</td>
                     <td>{{ row.Email }}</td>
                     <td>{{ row.Mobile }}</td>
                     <td>{{ row.Address }}</td>
-                    <td colspan="2"><button
+                    <td colspan="2"><button 
                             class="border rounded-lg p-1 bg-blue-600 text-white">Edit</button>&nbsp;
-                            <button @click="Delete"
+                            <button @click="deleteUser(i)"
                             class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
                 </tr>
             </table>
@@ -91,9 +91,8 @@ export default {
             this.dataarray.push(newUser);
            
         },
-        deleteUser(e){
-            e.preventDefault()
-            console.log(newUser);
+        deleteUser(index){
+            this.dataarray.splice(index,1); 
         }
     }
 }
