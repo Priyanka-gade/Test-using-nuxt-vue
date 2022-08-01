@@ -17,7 +17,7 @@
                 </div><br />
                 <br />
                 <button @click="addUserTodata" type="button" class="border rounded-lg p-1 bg-blue-600 text-white">Add User</button>
-                <button type="reset">Reset</button>
+                <!-- <button type="reset">Reset</button> -->
             </form>
         </div>
         <div class="float-right">
@@ -54,7 +54,8 @@
                     <td>{{ row.Mobile }}</td>
                     <td>{{ row.Address }}</td>
                     <td colspan="2"><button
-                            class="border rounded-lg p-1 bg-blue-600 text-white">Edit</button>&nbsp;<button
+                            class="border rounded-lg p-1 bg-blue-600 text-white">Edit</button>&nbsp;
+                            <button @click="Delete"
                             class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
                 </tr>
             </table>
@@ -73,9 +74,7 @@ export default {
             Name: '',
             Email: '',
             Mobile: '',
-            Address: '',
-
-            newdata: [],
+            Address: ''
         }
     },
     methods: {
@@ -88,11 +87,13 @@ export default {
                 Mobile:this.Mobile,
                 Address:this.Address
             }
-            // this.$emit("add-user", newUser)
-                // this.Name = '',
-                // this.Email='',
-                // this.Mobile='',
-                // this.Address=''
+
+            this.dataarray.push(newUser);
+           
+        },
+        deleteUser(e){
+            e.preventDefault()
+            console.log(newUser);
         }
     }
 }
