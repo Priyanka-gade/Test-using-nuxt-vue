@@ -1,26 +1,40 @@
 <template>
-    <div class="w-2/3">
+    <div class="">
         <div class="float-left">
-            <form class="grid justify-items-left bg-slate-200 p-7 w-64">
-                <h1 class="text-center">Add New user </h1>
-                <div>
-                    <input type="text" v-model="Name" placeholder="Name" required />
-                </div><br />
-                <div>
-                    <input type="text" v-model="Email" placeholder="Email" required />
-                </div><br />
-                <div>
-                    <input type="text" v-model="Mobile" placeholder="Mobile" required />
-                </div><br />
-                <div>
-                    <input type="text" v-model="Address" placeholder="Address" required />
-                </div><br />
-                <br />
-                <button @click="addUserTodata" type="button" class="border rounded-lg p-1 bg-blue-600 text-white">Add User</button>
+            <form class="sm:grid justify-items-left bg-slate-200 p-7 ">
+                <h1 id="title" class="text-center text-xl font-bold font-serif">Add New user </h1>
+                <div class="sm:grid justify-items-left bg-slate-200 p-7 ">
+                    <div>
+                        <label>Name :</label><br />
+                        <input type="text" class="capitalize w-52" v-model="newUser.Name" placeholder="Name" required />
+                    </div><br />
+                    <div>
+                        <label>Email :</label><br />
+                        <input type="text" v-model="newUser.Email" class="capitalize w-52"
+                             title="incorrect email"
+                            placeholder="Email" required />
+                    </div><br />
+                    <div>
+                        <label>Mobile :</label><br />
+                        <input type="text" class="capitalize w-52" v-model="newUser.Mobile" placeholder="Mobile" required />
+                    </div><br />
+                    <div>
+                        <label>Address :</label><br />
+                        <textarea type="text" class="capitalize w-52" v-model="newUser.Address" placeholder="Address" required />
+                    </div><br />
+                    <br />
+                    <button id="btnadd" @click="addUserTodata" type="button"
+                        class="border rounded-lg p-1 bg-blue-600 text-white">Add
+                        User</button>
+                </div>
+
                 <!-- <button type="reset">Reset</button> -->
             </form>
         </div>
-        <div class="float-right">
+        <div class="sm:float-right bg-slate-200 w-2/3">
+            <div class="bg-slate-200 sm:float-right p-2">
+                <input type="search" class="rounded-full bg-white p-1" placeholder="Search" />
+            </div>
             <table class="border">
                 <tr class="bg-slate-200 border my-2">
                     <th class="py-3 px-6">
@@ -48,18 +62,38 @@
                             class="border rounded-lg p-1 bg-blue-600 text-white">Edit</button>&nbsp;<button
                             class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
                 </tr> -->
-                <tr v-for="(row,i) in dataarray" :key="row" class=" bg-slate-100 border-b">
+                <tr v-for="(row, i) in dataarray" :key="row" class=" bg-slate-100 border-b">
                     <td>{{ row.Name }}</td>
                     <td>{{ row.Email }}</td>
                     <td>{{ row.Mobile }}</td>
                     <td>{{ row.Address }}</td>
-                    <td colspan="2"><button 
+                    <td colspan="2"><button @click="editUserDetails(i)"
                             class="border rounded-lg p-1 bg-blue-600 text-white">Edit</button>&nbsp;
-                            <button @click="deleteUser(i)"
-                            class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
+                        <button @click="deleteUser(i)"
+                            class="border rounded-lg p-1 bg-red-500 text-white">Delete</button>
+                    </td>
                 </tr>
             </table>
         </div>
+        <!-- <div v-if="this.flag" class="flex flex-row">
+            <form @submit="updatedata()" class="grid justify-items-left bg-slate-200 p-7 w-64">
+                <div>
+                    <input type="text" v-model="Name" placeholder="Name" required />
+                </div><br />
+                <div>
+                    <input type="text" v-model="Email" placeholder="Email" required />
+                </div><br />
+                <div>
+                    <input type="text" v-model="Mobile" placeholder="Mobile" required />
+                </div><br />
+                <div>
+                    <input type="text" v-model="Address" placeholder="Address" required />
+                </div><br />
+                <br />
+                <button type="button" class="border rounded-lg p-1 bg-blue-600 text-white">
+                    Update</button>
+            </form> 
+        </div>-->
     </div>
 </template>
 <script>
@@ -71,29 +105,97 @@ export default {
     props: ['dataarray', 'items'],
     data() {
         return {
-            Name: '',
-            Email: '',
-            Mobile: '',
-            Address: ''
+            isEdit: false,
+            editIndex: -1,
+            newUser: {
+                Name: null,
+                Email: '',
+                Mobile: '',
+                Address: ''
+            },
+
+            flag: false,
+
+            userFINd: [],
+            uniqueEmail: [],
         }
     },
     methods: {
         addUserTodata(e) {
             e.preventDefault()
-            const newUser = {
-                id: Date.now(),
-                Name: this.Name,
-                Email:this.Email,
-                Mobile:this.Mobile,
-                Address:this.Address
+            // const newUser = {
+            //     id: Date.now(),
+            //     Name: this.Name,
+            //     Email: this.Email,
+            //     Mobile: this.Mobile,
+            //     Address: this.Address
+            // }
+            if (this.isEdit === true) {
+                this.dataarray[this.editIndex] = this.newUser;
+                (this.isEdit = false), (this.editIndex = -1);
+                let updatebtn = document.getElementById("btnadd");
+                let formtitle = document.getElementById("title");
+                updatebtn.innerText = "Add User";
+                formtitle.innerText = "Update User";
+            } else {
+                this.dataarray.push(this.newUser);
             }
 
-            this.dataarray.push(newUser);
-           
+
+            this.newUser = {
+                Name: '',
+                Email: '',
+                Mobile: '',
+                Address: ''
+            }
+
+
         },
-        deleteUser(index){
-            this.dataarray.splice(index,1); 
-        }
+        deleteUser(index) {
+            this.dataarray.splice(index, 1);
+        },
+        editUserDetails(i) {
+            this.flag = !this.flag
+
+            this.newUser.id = this.dataarray[i].id;
+            this.newUser.Name = this.dataarray[i].Name;
+            this.newUser.Email = this.dataarray[i].Email;
+            this.newUser.Mobile = this.dataarray[i].Mobile;
+            this.isEdit = true;
+            this.editIndex = i;
+            let updatebtn = document.getElementById("btnadd");
+            let formtitle = document.getElementById("title");
+            updatebtn.innerText = "Update";
+            formtitle.innerText = "Update User";
+        },
+        updatedata(e) {
+            e.preventDefault()
+            //  this.newUser.id = this.dataarray[i].id
+            // this.newUser.Name = this.dataarray[i].Name;
+            // this.newUser.Email = this.dataarray[i].Email;
+            // this.newUser.Mobile = this.dataarray[i].Mobile;
+            // this.dataarray.filter((items) => {
+            //     if (items.id == this.id) {
+            //         items.Name = this.Name,
+            //         items.Email= this.Email,
+            //         items.Mobile=this.Mobile,
+            //         items.Address=this.Address
+            //     }
+            // })
+        },
+        userFindByName() {
+            // console.log(newUser.Name);
+            this.userFind = this.dataarray.filter((e) => {
+
+                if (e.Name.startsWith(newUser.Name)) {
+                    console.log(e);
+                    return e;
+                }
+            });
+            console.log(this.userFind);
+        },
     }
+
 }
+
 </script>
