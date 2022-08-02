@@ -2,22 +2,32 @@
     <div class="">
         <div class="float-left">
             <form class="sm:grid justify-items-left bg-slate-200 p-7 ">
-                <h1 class="text-center">Add New user </h1>
-                <div>
-                    <input type="text" class="capitalize" @keyup="userFndName(newUser.Name)" v-model="newUser.Name" placeholder="Name" required />
-                </div><br />
-                <div>
-                    <input type="text" @keyup="userFndEmail(newUser.Email)" v-model="newUser.Email" placeholder="Email" required />
-                </div><br />
-                <div>
-                    <input type="text" @keyup="userFndMobile(newUser.Mobile)" v-model="newUser.Mobile" placeholder="Mobile" required />
-                </div><br />
-                <div>
-                    <textarea type="text" @keyup="userFndAddress(newUser.Address)" v-model="newUser.Address" placeholder="Address" class="w-52" required />
-                </div><br />
-                <br />
-                <button id="btnadd" @click="addUserTodata" type="button" class="border rounded-lg p-1 bg-blue-600 text-white">Add
-                    User</button>
+                <h1 id="title" class="text-center text-xl font-bold font-serif">Add New user </h1>
+                <div class="sm:grid justify-items-left bg-slate-200 p-7 ">
+                    <div>
+                        <label>Name :</label><br />
+                        <input type="text" class="capitalize w-52" v-model="newUser.Name" placeholder="Name" required />
+                    </div><br />
+                    <div>
+                        <label>Email :</label><br />
+                        <input type="text" v-model="newUser.Email" class="capitalize w-52"
+                             title="incorrect email"
+                            placeholder="Email" required />
+                    </div><br />
+                    <div>
+                        <label>Mobile :</label><br />
+                        <input type="text" class="capitalize w-52" v-model="newUser.Mobile" placeholder="Mobile" required />
+                    </div><br />
+                    <div>
+                        <label>Address :</label><br />
+                        <textarea type="text" class="capitalize w-52" v-model="newUser.Address" placeholder="Address" required />
+                    </div><br />
+                    <br />
+                    <button id="btnadd" @click="addUserTodata" type="button"
+                        class="border rounded-lg p-1 bg-blue-600 text-white">Add
+                        User</button>
+                </div>
+
                 <!-- <button type="reset">Reset</button> -->
             </form>
         </div>
@@ -107,7 +117,7 @@ export default {
             flag: false,
 
             userFINd: [],
-            uniqueEmail:[],
+            uniqueEmail: [],
         }
     },
     methods: {
@@ -123,8 +133,10 @@ export default {
             if (this.isEdit === true) {
                 this.dataarray[this.editIndex] = this.newUser;
                 (this.isEdit = false), (this.editIndex = -1);
-                 let updatebtn= document.getElementById("btnadd");
-                 updatebtn.innerText="Add User";
+                let updatebtn = document.getElementById("btnadd");
+                let formtitle = document.getElementById("title");
+                updatebtn.innerText = "Add User";
+                formtitle.innerText = "Update User";
             } else {
                 this.dataarray.push(this.newUser);
             }
@@ -151,8 +163,10 @@ export default {
             this.newUser.Mobile = this.dataarray[i].Mobile;
             this.isEdit = true;
             this.editIndex = i;
-            let updatebtn= document.getElementById("btnadd");
-                 updatebtn.innerText="Update";
+            let updatebtn = document.getElementById("btnadd");
+            let formtitle = document.getElementById("title");
+            updatebtn.innerText = "Update";
+            formtitle.innerText = "Update User";
         },
         updatedata(e) {
             e.preventDefault()
@@ -169,11 +183,11 @@ export default {
             //     }
             // })
         },
-        userFindByName(){
+        userFindByName() {
             // console.log(newUser.Name);
             this.userFind = this.dataarray.filter((e) => {
-                
-                if(e.Name.startsWith(newUser.Name)){
+
+                if (e.Name.startsWith(newUser.Name)) {
                     console.log(e);
                     return e;
                 }
