@@ -13,7 +13,7 @@
                     <input type="text" v-model="newUser.Mobile" placeholder="Mobile" required />
                 </div><br />
                 <div>
-                    <input type="text" v-model="newUser.Address" placeholder="Address" required />
+                    <textarea type="text" v-model="newUser.Address" placeholder="Address" class="w-52" required />
                 </div><br />
                 <br />
                 <button id="btnadd" @click="addUserTodata" type="button" class="border rounded-lg p-1 bg-blue-600 text-white">Add
