@@ -6,21 +6,23 @@
                 <div class="sm:grid justify-items-left bg-slate-200 p-7 ">
                     <div>
                         <label>Name :</label><br />
-                        <input type="text" class="capitalize w-52" v-model="newUser.Name" placeholder="Name" required />
+                        <input @change="validationForName()" type="text" class="capitalize w-52" v-model="newUser.Name"
+                            placeholder="Name" required />
                     </div><br />
                     <div>
                         <label>Email :</label><br />
-                        <input type="text" v-model="newUser.Email" class="capitalize w-52"
-                             title="incorrect email"
-                            placeholder="Email" required />
+                        <input @change="validationForEmail()" type="text" v-model="newUser.Email"
+                            class="capitalize w-52" title="incorrect email" placeholder="Email" required />
                     </div><br />
                     <div>
                         <label>Mobile :</label><br />
-                        <input type="text" class="capitalize w-52" v-model="newUser.Mobile" placeholder="Mobile" required />
+                        <input @change="validationForMobile()" type="text" class="capitalize w-52"
+                            v-model="newUser.Mobile" placeholder="Mobile" required />
                     </div><br />
                     <div>
                         <label>Address :</label><br />
-                        <textarea type="text" class="capitalize w-52" v-model="newUser.Address" placeholder="Address" required />
+                        <textarea type="text" class="capitalize w-52" v-model="newUser.Address" placeholder="Address"
+                            required></textarea>
                     </div><br />
                     <br />
                     <button id="btnadd" @click="addUserTodata" type="button"
@@ -33,7 +35,8 @@
         </div>
         <div class="sm:float-right bg-slate-200 w-2/3">
             <div class="bg-slate-200 sm:float-right p-2">
-                <input type="search" class="rounded-full bg-white p-1" placeholder="Search" />
+                <input type="search" @input="searchInput($event)" class="rounded-full bg-white p-1"
+                    placeholder="Search" />
             </div>
             <table class="border">
                 <tr class="bg-slate-200 border my-2">
@@ -106,23 +109,32 @@ export default {
     data() {
         return {
             isEdit: false,
-            editIndex: -1,
+            edtIndex: -1,
             newUser: {
                 Name: null,
                 Email: '',
                 Mobile: '',
                 Address: ''
             },
+            searchText: '',
 
             flag: false,
-
-            userFINd: [],
-            uniqueEmail: [],
+            checkemail: ''
+        }
+    },
+    computed: {
+        filteredRecords() {
+            if (this.searchText) {
+                return this.dataarray.filter(user => user.Name.toLowerCase().includes(this.searchText.toLowerCase()))
+            }
+            return this.dataarray;
         }
     },
     methods: {
         addUserTodata(e) {
             e.preventDefault()
+            this.checkemail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+            this.checkmobile = /^[+][(]?[0-9]{1,3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,7}$/gm;
             // const newUser = {
             //     id: Date.now(),
             //     Name: this.Name,
@@ -130,14 +142,32 @@ export default {
             //     Mobile: this.Mobile,
             //     Address: this.Address
             // }
+
             if (this.isEdit === true) {
-                this.dataarray[this.editIndex] = this.newUser;
-                (this.isEdit = false), (this.editIndex = -1);
+                this.dataarray[this.edtIndex] = this.newUser;
+                (this.isEdit = false), (this.edtIndex = -1);
                 let updatebtn = document.getElementById("btnadd");
                 let formtitle = document.getElementById("title");
                 updatebtn.innerText = "Add User";
                 formtitle.innerText = "Update User";
-            } else {
+            }
+            // else if (!isNaN(this.newUser.Name) || this.newUser.Name == null || this.newUser.Name == "") {
+            //     alert("Please Enter Name");
+            // }
+            // else if (this.checkemail.test(this.newUser.Email)) {
+            // }
+            // else if (!this.checkemail.test(this.newUser.Email)) {
+            //     alert("Email is Invalid");
+            // }
+            // else if (this.checkmobile.test(this.newUser.Mobile)) {
+            // }
+            // else if (!this.checkmobile.test(this.newUser.Mobile)) {
+            //     alert("Mobile no. is Invalid");
+            // }
+            // else if (this.newUser.Address == null || this.newUser.Address == "") {
+            //     alert("Please Enter Address");
+            // }
+            else {
                 this.dataarray.push(this.newUser);
             }
 
@@ -151,6 +181,9 @@ export default {
 
 
         },
+        searchInput(evt) {
+            this.searchText = evt.target.value;
+        },
         deleteUser(index) {
             this.dataarray.splice(index, 1);
         },
@@ -162,7 +195,7 @@ export default {
             this.newUser.Email = this.dataarray[i].Email;
             this.newUser.Mobile = this.dataarray[i].Mobile;
             this.isEdit = true;
-            this.editIndex = i;
+            this.edtIndex = i;
             let updatebtn = document.getElementById("btnadd");
             let formtitle = document.getElementById("title");
             updatebtn.innerText = "Update";
@@ -183,19 +216,13 @@ export default {
             //     }
             // })
         },
-        userFindByName() {
-            // console.log(newUser.Name);
-            this.userFind = this.dataarray.filter((e) => {
-
-                if (e.Name.startsWith(newUser.Name)) {
-                    console.log(e);
-                    return e;
-                }
-            });
-            console.log(this.userFind);
-        },
+        // validationMobile() {
+        //     if (isNaN(this.newUser.Mobile) || this.newUser.Mobile < 1000000000 || this.userData.mobile > 9999999999) {
+        //         alert("Mobile Number is Invalid");
+        //         this.resetForm();
+        //     }
+        // }
     }
-
 }
 
 </script>
