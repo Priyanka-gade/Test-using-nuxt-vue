@@ -6,17 +6,17 @@
                 <div class="sm:grid justify-items-left bg-slate-200 p-7 ">
                     <div>
                         <label>Name :</label><br />
-                        <input @change="validationForName()" type="text" class="capitalize w-52" v-model="newUser.Name"
+                        <input type="text" class="capitalize w-52" v-model="newUser.Name"
                             placeholder="Name" required />
                     </div><br />
                     <div>
                         <label>Email :</label><br />
-                        <input @change="validationForEmail()" type="text" v-model="newUser.Email"
+                        <input  type="text" v-model="newUser.Email"
                             class="capitalize w-52" title="incorrect email" placeholder="Email" required />
                     </div><br />
                     <div>
                         <label>Mobile :</label><br />
-                        <input @change="validationForMobile()" type="text" class="capitalize w-52"
+                        <input type="text" class="capitalize w-52"
                             v-model="newUser.Mobile" placeholder="Mobile" required />
                     </div><br />
                     <div>
@@ -181,8 +181,8 @@ export default {
 
 
         },
-        searchInput(evt) {
-            this.searchText = evt.target.value;
+        searchInput(e) {
+            this.searchText = e.target.value;
         },
         deleteUser(index) {
             this.dataarray.splice(index, 1);
@@ -215,13 +215,7 @@ export default {
             //         items.Address=this.Address
             //     }
             // })
-        },
-        // validationMobile() {
-        //     if (isNaN(this.newUser.Mobile) || this.newUser.Mobile < 1000000000 || this.userData.mobile > 9999999999) {
-        //         alert("Mobile Number is Invalid");
-        //         this.resetForm();
-        //     }
-        // }
+        }
     }
 }
 
