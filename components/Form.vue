@@ -106,7 +106,7 @@ export default {
     data() {
         return {
             isEdit: false,
-            editIndex: -1,
+            edtIndex: -1,
             newUser: {
                 Name: null,
                 Email: '',
@@ -114,10 +114,7 @@ export default {
                 Address: ''
             },
 
-            flag: false,
-
-            userFINd: [],
-            uniqueEmail: [],
+            flag: false
         }
     },
     methods: {
@@ -130,9 +127,10 @@ export default {
             //     Mobile: this.Mobile,
             //     Address: this.Address
             // }
+
             if (this.isEdit === true) {
-                this.dataarray[this.editIndex] = this.newUser;
-                (this.isEdit = false), (this.editIndex = -1);
+                this.dataarray[this.edtIndex] = this.newUser;
+                (this.isEdit = false), (this.edtIndex = -1);
                 let updatebtn = document.getElementById("btnadd");
                 let formtitle = document.getElementById("title");
                 updatebtn.innerText = "Add User";
@@ -162,7 +160,7 @@ export default {
             this.newUser.Email = this.dataarray[i].Email;
             this.newUser.Mobile = this.dataarray[i].Mobile;
             this.isEdit = true;
-            this.editIndex = i;
+            this.edtIndex = i;
             let updatebtn = document.getElementById("btnadd");
             let formtitle = document.getElementById("title");
             updatebtn.innerText = "Update";
