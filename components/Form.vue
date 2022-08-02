@@ -1,19 +1,19 @@
 <template>
     <div class="">
         <div class="float-left">
-            <form class="sm:grid justify-items-left bg-slate-200 p-7">
+            <form class="sm:grid justify-items-left bg-slate-200 p-7 ">
                 <h1 class="text-center">Add New user </h1>
                 <div>
-                    <input type="text" v-model="newUser.Name" placeholder="Name" required />
+                    <input type="text" class="capitalize" @keyup="userFndName(newUser.Name)" v-model="newUser.Name" placeholder="Name" required />
                 </div><br />
                 <div>
-                    <input type="text" v-model="newUser.Email" placeholder="Email" required />
+                    <input type="text" @keyup="userFndEmail(newUser.Email)" v-model="newUser.Email" placeholder="Email" required />
                 </div><br />
                 <div>
-                    <input type="text" v-model="newUser.Mobile" placeholder="Mobile" required />
+                    <input type="text" @keyup="userFndMobile(newUser.Mobile)" v-model="newUser.Mobile" placeholder="Mobile" required />
                 </div><br />
                 <div>
-                    <textarea type="text" v-model="newUser.Address" placeholder="Address" class="w-52" required />
+                    <textarea type="text" @keyup="userFndAddress(newUser.Address)" v-model="newUser.Address" placeholder="Address" class="w-52" required />
                 </div><br />
                 <br />
                 <button id="btnadd" @click="addUserTodata" type="button" class="border rounded-lg p-1 bg-blue-600 text-white">Add
@@ -21,7 +21,7 @@
                 <!-- <button type="reset">Reset</button> -->
             </form>
         </div>
-        <div class="sm:float-right w-2/3">
+        <div class="sm:float-right bg-slate-200 w-2/3">
             <div class="bg-slate-200 sm:float-right p-2">
                 <input type="search" class="rounded-full bg-white p-1" placeholder="Search" />
             </div>
@@ -104,7 +104,10 @@ export default {
                 Address: ''
             },
 
-            flag: false
+            flag: false,
+
+            userFINd: [],
+            uniqueEmail:[],
         }
     },
     methods: {
@@ -165,7 +168,18 @@ export default {
             //         items.Address=this.Address
             //     }
             // })
-        }
+        },
+        userFindByName(){
+            // console.log(newUser.Name);
+            this.userFind = this.dataarray.filter((e) => {
+                
+                if(e.Name.startsWith(newUser.Name)){
+                    console.log(e);
+                    return e;
+                }
+            });
+            console.log(this.userFind);
+        },
     }
 
 }
