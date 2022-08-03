@@ -40,7 +40,6 @@
             </div>
             <table class="border float-right col-span-2">
                                   <!-- {{stordata}} -->
-              
                 <tr class="bg-slate-400 border rounded-full my-2">
                     <th class="py-3 px-6">
                         Name
