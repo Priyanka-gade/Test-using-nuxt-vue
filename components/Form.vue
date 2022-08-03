@@ -35,7 +35,7 @@
         </div>
         <div class="sm:float-right bg-slate-200 w-2/3">
             <div class="bg-slate-200 sm:float-right p-2">
-                <input type="search" @input="searchInput($event)" class="rounded-full bg-white p-1"
+                <input type="search" @input="searchInput(e)" class="rounded-full bg-white p-1"
                     placeholder="Search" />
             </div>
             <table class="border">
@@ -151,16 +151,16 @@ export default {
                 updatebtn.innerText = "Add User";
                 formtitle.innerText = "Update User";
             }
-            // else if (!isNaN(this.newUser.Name) || this.newUser.Name == null || this.newUser.Name == "") {
-            //     alert("Please Enter Name");
-            // }
+            else if (!isNaN(this.newUser.Name) || this.newUser.Name == null || this.newUser.Name == "") {
+                alert("Please Enter Name");
+            }
             // else if (this.checkemail.test(this.newUser.Email)) {
             // }
-            // else if (!this.checkemail.test(this.newUser.Email)) {
-            //     alert("Email is Invalid");
-            // }
-            // else if (this.checkmobile.test(this.newUser.Mobile)) {
-            // }
+            else if (!this.checkemail.test(this.newUser.Email)) {
+                alert("Email is Invalid");
+            }
+            else if (this.checkmobile.test(this.newUser.Mobile)) {
+            }
             // else if (!this.checkmobile.test(this.newUser.Mobile)) {
             //     alert("Mobile no. is Invalid");
             // }
@@ -177,7 +177,9 @@ export default {
                 Email: '',
                 Mobile: '',
                 Address: ''
-            }
+            },
+            localStorage.setItem("user",JSON.stringify(this.dataarray)),
+            JSON.parse(localStorage.getItem("user"))
 
 
         },
