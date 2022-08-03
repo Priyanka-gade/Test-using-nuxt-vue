@@ -177,7 +177,9 @@ export default {
                 Email: '',
                 Mobile: '',
                 Address: ''
-            }
+            },
+            localStorage.setItem("user",JSON.stringify(this.dataarray)),
+            JSON.parse(localStorage.getItem("user"))
 
 
         },
