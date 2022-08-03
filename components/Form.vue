@@ -128,7 +128,7 @@ export default {
     },
     computed: {
         stordata() {
-            this.dataarray = JSON.parse(sessionStorage.getItem("user"))
+            this.dataarray = JSON.parse(localStorage.getItem("user"))
 
         },
         filteredRecords() {
@@ -164,33 +164,28 @@ export default {
             }
             // else if (this.checkemail.test(this.newUser.Email)) {
             // }
-            // else if (!this.checkemail.test(this.newUser.Email)) {
-            //     alert("Email is Invalid");
-            // }
-            // else if (!this.checkmobile.test(this.newUser.Mobile)) {
-            //     alert("mob is Invalid");
-            // }
+            else if (!this.checkemail.test(this.newUser.Email)) {
+                alert("Email is Invalid");
+            }
+            else if (!this.checkmobile.test(this.newUser.Mobile)) {
+                alert("mob is Invalid");
+            }
             // else if (!this.checkmobile.test(this.newUser.Mobile)) {
             //     alert("Mobile no. is Invalid");
             // }
-            // else if (this.newUser.Address == null || this.newUser.Address == "") {
-            //     alert("Please Enter Address");
-            // }
+            else if (this.newUser.Address == null || this.newUser.Address == "") {
+                alert("Please Enter Address");
+            }
             else {
                 this.dataarray.push(this.newUser);
             }
-
-
             this.newUser = {
                 Name: '',
                 Email: '',
                 Mobile: '',
                 Address: ''
             },
-                sessionStorage.setItem("user", JSON.stringify(this.dataarray))
-            // JSON.parse(localStorage.getItem("user"))
-
-
+                localStorage.setItem("user", JSON.stringify(this.dataarray))
         },
         searchInput(e) {
             this.searchText = e.target.value;
