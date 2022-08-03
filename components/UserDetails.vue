@@ -1,8 +1,8 @@
-<template>
+<!-- <template>
     <div>
         <div v-for="items in dataarray" :key="items.id">
-            <!-- {{ items.Name }} -->
-            <User></User>
+             {{ items.Name }} -->
+            <!-- <User></User>
         </div>
     </div>
 </template>
@@ -14,4 +14,4 @@ export default {
     components:{User}
 
 }
-</script>
+</script> --> 

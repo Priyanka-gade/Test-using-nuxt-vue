@@ -1,7 +1,7 @@
 <template>
     <div class="sm:grid gap-x-7 grid-cols-3 h-screen ">
         <div class="sm:p-5">
-            <form class="sm:justify-items-center font-bold bg-slate-200 p-4 ">
+            <form class="sm:justify-items-center font-bold bg-slate-300 p-4 ">
                 <br />
                 <h1 id="title" class="text-center text-xl font-bold font-serif">Add New user </h1>
                 <div class="ml-14">
@@ -27,7 +27,7 @@
                     </div><br />
                     <br />
                     <button id="btnadd" @click="addUserTodata" type="button"
-                        class="border rounded-lg p-1 bg-blue-600 text-white">Add
+                        class="border rounded-lg p-1 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white">Add
                         User</button>
                         <br/>
                 </div>
@@ -35,13 +35,12 @@
             </form>
         </div>
         <div class="sm:float-right bg-slate-200 col-span-2 m-5 p-5">
-            <div class="bg-slate-200 sm:float-right p-2">
+            <div class="bg-slate-200 sm:float-right p-2 ">
                 <input type="search" @input="searchInput($event)" class="rounded-full bg-white p-1" placeholder="Search" />
             </div>
             <table class="border float-right col-span-2">
                                   <!-- {{stordata}} -->
-              
-                <tr class="bg-slate-100 border my-2">
+                <tr class="bg-slate-400 border rounded-full my-2">
                     <th class="py-3 px-6">
                         Name
                     </th>
@@ -68,15 +67,15 @@
                             class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
                 </tr> -->
 
-                <tr v-for="(row, i) in filteredRecords" :key="row" class=" sm:bg-slate-100 border-b">
+                <tr v-for="(row, i) in filteredRecords" :key="row" class=" sm:bg-white border-b border-slate-300">
                     <td class="py-3 px-6">{{ row.Name }}</td>
                     <td class="py-3 px-6">{{ row.Email }}</td>
                     <td class="py-3 px-6">{{ row.Mobile }}</td>
                     <td class="py-3 px-6">{{ row.Address }}</td>
                     <td colspan="2" class="py-3 px-6"><button @click="editUserDetails(i)"
-                            class="border rounded-lg p-1 bg-blue-600 text-white">Edit</button>&nbsp;
+                            class="border rounded-lg p-1 bg-gradient-to-r from-blue-400 to-blue-900 text-white">Edit</button>&nbsp;
                         <button @click="deleteUser(i)"
-                            class="border rounded-lg p-1 bg-red-500 text-white">Delete</button>
+                            class="border rounded-lg p-1 bg-gradient-to-r from-red-400 to-red-900 text-white">Delete</button>
                     </td>
                 </tr>
 
@@ -128,7 +127,7 @@ export default {
     },
     computed: {
         stordata() {
-            this.dataarray = JSON.parse(sessionStorage.getItem("user"))
+            this.dataarray = JSON.parse(localStorage.getItem("user"))
 
         },
         filteredRecords() {
@@ -164,33 +163,28 @@ export default {
             }
             // else if (this.checkemail.test(this.newUser.Email)) {
             // }
-            // else if (!this.checkemail.test(this.newUser.Email)) {
-            //     alert("Email is Invalid");
-            // }
-            // else if (!this.checkmobile.test(this.newUser.Mobile)) {
-            //     alert("mob is Invalid");
-            // }
+            else if (!this.checkemail.test(this.newUser.Email)) {
+                alert("Email is Invalid");
+            }
+            else if (!this.checkmobile.test(this.newUser.Mobile)) {
+                alert("mob is Invalid");
+            }
             // else if (!this.checkmobile.test(this.newUser.Mobile)) {
             //     alert("Mobile no. is Invalid");
             // }
-            // else if (this.newUser.Address == null || this.newUser.Address == "") {
-            //     alert("Please Enter Address");
-            // }
+            else if (this.newUser.Address == null || this.newUser.Address == "") {
+                alert("Please Enter Address");
+            }
             else {
                 this.dataarray.push(this.newUser);
             }
-
-
             this.newUser = {
                 Name: '',
                 Email: '',
                 Mobile: '',
                 Address: ''
             },
-                sessionStorage.setItem("user", JSON.stringify(this.dataarray))
-            // JSON.parse(localStorage.getItem("user"))
-
-
+                localStorage.setItem("user", JSON.stringify(this.dataarray))
         },
         searchInput(e) {
             this.searchText = e.target.value;

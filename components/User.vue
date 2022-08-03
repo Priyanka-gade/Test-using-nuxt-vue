@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
         <div class=" ">
                 <p>{{ items.Name }}</p>
                 <p>{{ items.Email }}</p>
@@ -15,4 +15,4 @@ export default {
     name: "UserC",
     props:['dataarray','items']
 }
-</script>
+</script> -->
