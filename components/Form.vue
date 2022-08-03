@@ -36,9 +36,11 @@
         </div>
         <div class="sm:float-right bg-slate-200 col-span-2 m-5 p-5">
             <div class="bg-slate-200 sm:float-right p-2">
-                <input type="search" @input="searchInput(e)" class="rounded-full bg-white p-1" placeholder="Search" />
+                <input type="search" @input="searchInput($event)" class="rounded-full bg-white p-1" placeholder="Search" />
             </div>
             <table class="border float-right col-span-2">
+                                  <!-- {{stordata}} -->
+              
                 <tr class="bg-slate-100 border my-2">
                     <th class="py-3 px-6">
                         Name
@@ -66,7 +68,7 @@
                             class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
                 </tr> -->
 
-                <tr v-for="(row, i) in dataarray" :key="row" class=" sm:bg-slate-100 border-b">
+                <tr v-for="(row, i) in filteredRecords" :key="row" class=" sm:bg-slate-100 border-b">
                     <td class="py-3 px-6">{{ row.Name }}</td>
                     <td class="py-3 px-6">{{ row.Email }}</td>
                     <td class="py-3 px-6">{{ row.Mobile }}</td>
@@ -77,6 +79,7 @@
                             class="border rounded-lg p-1 bg-red-500 text-white">Delete</button>
                     </td>
                 </tr>
+
             </table>
         </div>
         <!-- <div v-if="this.flag" class="flex flex-row">
@@ -125,7 +128,7 @@ export default {
     },
     computed: {
         stordata() {
-            this.dataarray = JSON.parse(localStorage.getItem("user"))
+            this.dataarray = JSON.parse(sessionStorage.getItem("user"))
 
         },
         filteredRecords() {
@@ -161,11 +164,12 @@ export default {
             }
             // else if (this.checkemail.test(this.newUser.Email)) {
             // }
-            else if (!this.checkemail.test(this.newUser.Email)) {
-                alert("Email is Invalid");
-            }
-            else if (this.checkmobile.test(this.newUser.Mobile)) {
-            }
+            // else if (!this.checkemail.test(this.newUser.Email)) {
+            //     alert("Email is Invalid");
+            // }
+            // else if (!this.checkmobile.test(this.newUser.Mobile)) {
+            //     alert("mob is Invalid");
+            // }
             // else if (!this.checkmobile.test(this.newUser.Mobile)) {
             //     alert("Mobile no. is Invalid");
             // }
@@ -183,13 +187,14 @@ export default {
                 Mobile: '',
                 Address: ''
             },
-                localStorage.setItem("user", JSON.stringify(this.dataarray))
+                sessionStorage.setItem("user", JSON.stringify(this.dataarray))
             // JSON.parse(localStorage.getItem("user"))
 
 
         },
         searchInput(e) {
             this.searchText = e.target.value;
+            console.log(e.target.value)
         },
         deleteUser(index) {
             this.dataarray.splice(index, 1);
