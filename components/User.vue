@@ -1,6 +1,5 @@
 <template>
-    <div class="flex flex-col items-center ">
-        <div class="m-2 p-2 bg-slate-200 w-64 ">
+        <div class=" ">
                 <p>{{ items.Name }}</p>
                 <p>{{ items.Email }}</p>
                 <p>{{ items.Mobile }}</p>
@@ -10,7 +9,6 @@
                 <button 
                     class="font-serif font-semibold float-right bg-green-800 rounded-md text-white p-1 m-1">Edit</button>
         </div>
-    </div>
 </template>
 <script>
 export default {
