@@ -4,7 +4,7 @@
             <form class="sm:justify-items-center font-bold bg-slate-300 p-4 ">
                 <br />
                 <h1 id="title" class="text-center text-xl font-bold font-serif">Add New user </h1>
-                <div class="ml-14">
+                <div class="ml-14 w-56 p-2 ">
                     <br/>
                     <div>
                         <label>Name :</label><br />
@@ -12,17 +12,17 @@
                     </div><br />
                     <div>
                         <label>Email :</label><br />
-                        <input type="text" v-model="newUser.Email" class="capitalize w-52 p-2 rounded-lg" title="incorrect email"
-                            placeholder="Email" required />
+                        <input type="text" v-model="newUser.Email" class=" w-52 p-2 rounded-lg" title="incorrect email"
+                            placeholder="abc@gmail.com" required />
                     </div><br />
                     <div>
                         <label>Mobile :</label><br />
-                        <input type="text" class="capitalize w-52 p-2 rounded-lg" v-model="newUser.Mobile" placeholder="Mobile"
+                        <input type="text" class="w-52 p-2 rounded-lg" v-model="newUser.Mobile" placeholder="Mobile +91XXXXXXXXXX"
                             required />
                     </div><br />
                     <div>
                         <label>Address :</label><br />
-                        <textarea type="text" class="capitalize w-52 p-2 rounded-lg" v-model="newUser.Address" placeholder="Address"
+                        <textarea type="text" class=" w-52 p-2 rounded-lg" v-model="newUser.Address" placeholder="Address"
                             required></textarea>
                     </div><br />
                     <br />
@@ -40,7 +40,7 @@
             </div>
             <table class="border float-right col-span-2">
                                   <!-- {{stordata}} -->
-                <tr class="bg-slate-400 border rounded-full my-2">
+                <tr class="bg-slate-400 border my-2">
                     <th class="py-3 px-6">
                         Name
                     </th>
@@ -162,6 +162,7 @@ export default {
                 alert("Please Enter Name");
             }
             // else if (this.checkemail.test(this.newUser.Email)) {
+                // ||dataarray.Email==newUser.Email
             // }
             else if (!this.checkemail.test(this.newUser.Email)) {
                 alert("Email is Invalid");
@@ -200,6 +201,7 @@ export default {
             this.newUser.Name = this.dataarray[i].Name;
             this.newUser.Email = this.dataarray[i].Email;
             this.newUser.Mobile = this.dataarray[i].Mobile;
+            this.newUser.Address = this.dataarray[i].Address;
             this.isEdit = true;
             this.edtIndex = i;
             let updatebtn = document.getElementById("btnadd");
