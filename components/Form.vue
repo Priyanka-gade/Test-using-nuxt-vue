@@ -5,10 +5,11 @@
                 <br />
                 <h1 id="title" class="text-center text-xl font-bold font-serif">Add New user </h1>
                 <div class="ml-14 w-56 p-2 ">
-                    <br/>
+                    <br />
                     <div>
                         <label>Name :</label><br />
-                        <input type="text" class="capitalize w-52 p-2 rounded-lg" v-model="newUser.Name" placeholder="Name" required />
+                        <input type="text" class="capitalize w-52 p-2 rounded-lg" v-model="newUser.Name"
+                            placeholder="Name" required />
                     </div><br />
                     <div>
                         <label>Email :</label><br />
@@ -17,29 +18,30 @@
                     </div><br />
                     <div>
                         <label>Mobile :</label><br />
-                        <input type="text" class="w-52 p-2 rounded-lg" v-model="newUser.Mobile" placeholder="Mobile +91XXXXXXXXXX"
-                            required />
+                        <input type="text" class="w-52 p-2 rounded-lg" v-model="newUser.Mobile"
+                            placeholder="Mobile +91XXXXXXXXXX" required />
                     </div><br />
                     <div>
                         <label>Address :</label><br />
-                        <textarea type="text" class=" w-52 p-2 rounded-lg" v-model="newUser.Address" placeholder="Address"
-                            required></textarea>
+                        <textarea type="text" class=" w-52 p-2 rounded-lg" v-model="newUser.Address"
+                            placeholder="Address" required></textarea>
                     </div><br />
                     <br />
                     <button id="btnadd" @click="addUserTodata" type="button"
                         class="border rounded-lg p-1 bg-gradient-to-r from-green-400 to-blue-500 hover:from-pink-500 hover:to-yellow-500 text-white">Add
                         User</button>
-                        <br/>
+                    <br />
                 </div>
                 <!-- <button type="reset">Reset</button> -->
             </form>
         </div>
         <div class="sm:float-right bg-slate-200 col-span-2 m-5 p-5">
             <div class="bg-slate-200 sm:float-right p-2 ">
-                <input type="search" @input="searchInput($event)" class="rounded-full bg-white p-1" placeholder="Search" />
+                <input type="search" @input="searchInput($event)" class="rounded-full bg-white p-1"
+                    placeholder="Search" />
             </div>
             <table class="border float-right col-span-2">
-                                  <!-- {{stordata}} -->
+                <!-- {{stordata}} -->
                 <tr class="bg-slate-400 border my-2">
                     <th class="py-3 px-6">
                         Name
@@ -67,7 +69,7 @@
                             class="border rounded-lg p-1 bg-red-500 text-white">Delete</button></td>
                 </tr> -->
 
-                <tr v-for="(row, i) in filteredRecords" :key="row" class=" sm:bg-white border-b border-slate-300">
+                <tr v-for="(row, i) in filterRecords" :key="row" class=" sm:bg-white border-b border-slate-300">
                     <td class="py-3 px-6">{{ row.Name }}</td>
                     <td class="py-3 px-6">{{ row.Email }}</td>
                     <td class="py-3 px-6">{{ row.Mobile }}</td>
@@ -130,7 +132,7 @@ export default {
             this.dataarray = JSON.parse(localStorage.getItem("user"))
 
         },
-        filteredRecords() {
+        filterRecords() {
             if (this.searchText) {
                 return this.dataarray.filter(user => user.Name.toLowerCase().includes(this.searchText.toLowerCase()))
             }
@@ -162,11 +164,14 @@ export default {
                 alert("Please Enter Name");
             }
             // else if (this.checkemail.test(this.newUser.Email)) {
-                // ||dataarray.Email==newUser.Email
+            // ||dataarray.Email==newUser.Email
             // }
             else if (!this.checkemail.test(this.newUser.Email)) {
                 alert("Email is Invalid");
             }
+            // else if (this.dataarray.Email == this.newUser.Email) {
+            //     alert("Email is already added");
+            // }
             else if (!this.checkmobile.test(this.newUser.Mobile)) {
                 alert("mob is Invalid");
             }
@@ -195,7 +200,7 @@ export default {
             this.dataarray.splice(index, 1);
         },
         editUserDetails(i) {
-            this.flag = !this.flag
+            // this.flag = !this.flag
 
             this.newUser.id = this.dataarray[i].id;
             this.newUser.Name = this.dataarray[i].Name;
@@ -209,8 +214,8 @@ export default {
             updatebtn.innerText = "Update";
             formtitle.innerText = "Update User";
         },
-        updatedata(e) {
-            e.preventDefault()
+        // updatedata(e) {
+        //     e.preventDefault()
             //  this.newUser.id = this.dataarray[i].id
             // this.newUser.Name = this.dataarray[i].Name;
             // this.newUser.Email = this.dataarray[i].Email;
@@ -223,7 +228,7 @@ export default {
             //         items.Address=this.Address
             //     }
             // })
-        }
+        // }
     }
 }
 
